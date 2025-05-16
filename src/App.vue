@@ -1,26 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app :theme="isDark ? 'dark' : 'customGreenTheme'">
+    <AppHeader />
+    <router-view />
+    <AppFooter />
+  </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import AppHeader from './components/AppHeader.vue'
+import AppFooter from './components/AppFooter.vue'
+import { useDarkModeStore } from './stores/darkMode';
+import { computed } from 'vue';
+const darkModeStore = useDarkModeStore();
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+const isDark = computed(() => darkModeStore.isDark);
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.v-main {
+  flex: 1 0 auto;
 }
 </style>
