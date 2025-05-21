@@ -1,23 +1,19 @@
 <template>
-	<v-footer class="text-center d-flex flex-column align-center" elevation="1">
-		<div class="d-flex ga-3">
-			<v-btn v-for="link in links" :key="link.text" :href="link.to" :target="link.target" variant="text" rounded
-				density="comfortable" width="40">
-				<v-icon :icon="link.icon" size="large"></v-icon>
+	<v-footer class="d-flex flex-column" elevation="4">
+		<div class="d-flex justify-center gap-4 py-4">
+			<v-btn v-for="link in links" :key="link.text" :href="link.to" :target="link.target" variant="text"
+				rounded="xl" class="footer-btn">
+				<v-icon :icon="link.icon" size="large" class="mr-2"></v-icon>
+				{{ link.text }}
 			</v-btn>
 		</div>
 
-		<v-divider class="my-2" thickness="2" width="50"></v-divider>
+		<v-divider></v-divider>
 
-		<div class="text-caption">
-			This is a demo project made by Jacob Sijsma (j-web.dev)
-		</div>
-
-
-		<v-divider class="my-2" thickness="2" width="50"></v-divider>
-
-		<div class="text-center mt-2">
-			{{ new Date().getFullYear() }} — <strong>Jacob Sijsma</strong>
+		<div class="pa-4 text-center">
+			<div class="text-body-1 mb-2">
+				This is a demo project made in Vue 3 with Vuetify.
+			</div>
 		</div>
 	</v-footer>
 </template>

@@ -1,12 +1,10 @@
-export function useHtmlUnescape() {
-	const unescapeHtml = (html: string): string => {
-	  const parser = new DOMParser();
-	  const doc = parser.parseFromString(html, 'text/html');
-	  return doc.documentElement.textContent || '';
+// composables/useHtmlDecoder.js
+export function useHtmlDecoder() {
+	const decodeHtml = (html) => {
+	  const txt = document.createElement("textarea");
+	  txt.innerHTML = html;
+	  return txt.value;
 	};
-  
-	return {
-	  unescapeHtml,
-	};
-}
+	return { decodeHtml };
+  }
   

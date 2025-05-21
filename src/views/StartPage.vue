@@ -63,6 +63,9 @@
 			<v-btn variant="outlined" :loading="loading" :disabled="loading" color="primary" size="large"
 				@click="fetchTriviaQuestions">Start Quiz</v-btn>
 
+			<v-alert closable="true" class="mt-4" v-if="error" variant="tonal" type="error" :title="errorTitle"
+				:text="errorText"></v-alert>
+
 		</div>
 	</DefaultLayout>
 </template>
@@ -79,7 +82,9 @@ const selectedCategory = ref(9)
 const selectedDifficulty = ref('easy')
 const isMultipleChoice = ref(true)
 const numberOfQuestions = ref(10)
-
+const error = ref(false)
+const errorTitle = ref('')
+const errorText = ref('')
 const router = useRouter()
 const quizStore = useQuizStore()
 
@@ -87,7 +92,22 @@ async function fetchTriviaQuestions() {
 	loading.value = true
 
 	const response = await fetch(`https://opentdb.com/api.php?amount=${numberOfQuestions.value}&category=${selectedCategory.value}&difficulty=${selectedDifficulty.value}&type=${isMultipleChoice.value ? 'multiple' : 'boolean'}`)
+
 	const data = await response.json()
+
+	if (data.response_code !== 0) {
+		loading.value = false
+		error.value = true
+		errorTitle.value = 'Error'
+		errorText.value = 'Failed to fetch questions. Please try different parameters.'
+	}
+
+	if (data.results.length === 0) {
+		loading.value = false
+		error.value = true
+		errorTitle.value = 'Error'
+		errorText.value = 'No questions found. Please try different parameters.'
+	}
 
 	const quizData = data.results.map(question => ({
 		...question,

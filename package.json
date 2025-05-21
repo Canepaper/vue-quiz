@@ -13,6 +13,7 @@
     "@vitejs/plugin-vue": "^5.2.4",
     "core-js": "^3.8.3",
     "pinia": "^3.0.2",
+    "pinia-plugin-persistedstate": "^4.3.0",
     "roboto-fontface": "*",
     "vite": "^6.3.5",
     "vite-plugin-vuetify": "^2.1.1",
