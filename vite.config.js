@@ -19,6 +19,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  server: {
+    port: 3001, // You can change this to any port you prefer
+    open: true, // This will automatically open the browser when you start the server
+  },
   /* remove the need to specify .vue files https://vitejs.dev/config/#resolve-extensions
   resolve: {
     extensions: [
